@@ -7,7 +7,7 @@
     "start": "node app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "efdiaz.dev@gmail.com",
   "license": "ISC",
   "description": "",
   "dependencies": {
