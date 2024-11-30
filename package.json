@@ -1,5 +1,5 @@
 {
-  "name": "back-admin",
+  "name": "tagliatore-back",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
@@ -7,7 +7,7 @@
     "start": "node app.js"
   },
   "keywords": [],
-  "author": "efdiaz.dev@gmail.com",
+  "author": "Erick Fernando Díaz Ladera",
   "license": "ISC",
   "description": "",
   "dependencies": {
