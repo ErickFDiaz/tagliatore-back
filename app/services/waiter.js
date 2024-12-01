@@ -31,7 +31,7 @@ const getAllActiveWaiters = async () => {
 // Obtener un mesero por su ID
 const getWaiterById = async (id) => {
     try {
-        return await waiterModel.findById(id);
+        return await waiterModel.findOne({ _id: id, active: true });
     } catch (error) {
         throw new Error('Error retrieving waiter by ID: ' + error.message);
     }
@@ -40,7 +40,7 @@ const getWaiterById = async (id) => {
 // Actualizar un mesero por su ID
 const updateWaiterById = async (id, updateData) => {
     try {
-        return await waiterModel.findByIdAndUpdate(id, updateData, { new: true });
+        return await waiterModel.findOneAndUpdate({ _id: id, active: true }, updateData, { new: true });
     } catch (error) {
         throw new Error('Error updating waiter: ' + error.message);
     }
@@ -49,11 +49,19 @@ const updateWaiterById = async (id, updateData) => {
 // Eliminar un mesero por su ID (eliminación lógica)
 const deleteWaiterById = async (id) => {
     try {
-        return await waiterModel.findByIdAndUpdate(id, { active: false }, { new: true });
+        return await waiterModel.findOneAndUpdate({ _id: id, active: true }, { active: false }, { new: true });
     } catch (error) {
         throw new Error('Error disabling waiter: ' + error.message);
     }
 };
+
+const activateWaiterById = async (id) => {
+    try {
+        return await waiterModel.findOneAndUpdate({ _id: id, active: false }, { active: true }, { new: true });
+    } catch (error) {
+        throw new Error('Error activating waiter: ' + error.message);
+    }
+}
 
 module.exports = {
     createWaiter,
@@ -61,5 +69,6 @@ module.exports = {
     getAllActiveWaiters,
     getWaiterById,
     updateWaiterById,
-    deleteWaiterById
+    deleteWaiterById,
+    activateWaiterById
 };

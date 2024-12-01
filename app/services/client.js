@@ -1,4 +1,4 @@
-const clientModel = require('../models/clients');
+const clientModel = require('../models/client');
 
 // Crear un nuevo cliente
 const createClient = async (clientData) => {
@@ -31,7 +31,7 @@ const getAllActiveClients = async () => {
 // Obtener un cliente por su ID
 const getClientById = async (id) => {
     try {
-        return await clientModel.findById(id);
+        return await clientModel.findOne({ _id: id, active: true });
     } catch (error) {
         throw new Error('Error retrieving client by ID: ' + error.message);
     }
@@ -40,7 +40,7 @@ const getClientById = async (id) => {
 // Actualizar un cliente por su ID
 const updateClientById = async (id, updateData) => {
     try {
-        return await clientModel.findByIdAndUpdate(id, updateData, { new: true });
+        return await clientModel.findOneAndUpdate({ _id: id, active: true }, updateData, { new: true });
     } catch (error) {
         throw new Error('Error updating client: ' + error.message);
     }
@@ -49,11 +49,20 @@ const updateClientById = async (id, updateData) => {
 // Eliminar un cliente por su ID (eliminación lógica)
 const deleteClientById = async (id) => {
     try {
-        return await clientModel.findByIdAndUpdate(id, { active: false }, { new: true });
+        return await clientModel.findOneAndUpdate({ _id: id, active: true }, { active: false }, { new: true });
     } catch (error) {
         throw new Error('Error disabling client: ' + error.message);
     }
 };
+
+//Activar un cliente por su ID
+const activateClientById = async (id) => {
+    try {
+        return await clientModel.findOneAndUpdate({ _id: id, active: false }, { active: true }, { new: true });
+    } catch (error) {
+        throw new Error('Error activating client: ' + error.message);
+    }
+}
 
 module.exports = {
     createClient,
@@ -61,5 +70,6 @@ module.exports = {
     getAllActiveClients,
     getClientById,
     updateClientById,
-    deleteClientById
+    deleteClientById,
+    activateClientById
 };
