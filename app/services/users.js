@@ -28,19 +28,19 @@ const getAllActiveUsers = async () => {
     }
 };
 
-// Obtener un usuario por su ID
-const getUserById = async (id) => {
+// Obtener un usuario activo por su ID
+const getActiveUserById = async (id) => {
     try {
-        return await userModel.findById(id);
+        return await userModel.findOne({ _id: id, active: true });
     } catch (error) {
-        throw new Error('Error retrieving user by ID: ' + error.message);
+        throw new Error('Error retrieving active user by ID: ' + error.message);
     }
 };
 
-// Actualizar un usuario por su ID
+// Actualizar un usuario por su ID (solo si está activo)
 const updateUserById = async (id, updateData) => {
     try {
-        return await userModel.findByIdAndUpdate(id, updateData, { new: true });
+        return await userModel.findOneAndUpdate({ _id: id, active: true }, updateData, { new: true });
     } catch (error) {
         throw new Error('Error updating user: ' + error.message);
     }
@@ -49,16 +49,25 @@ const updateUserById = async (id, updateData) => {
 // Eliminar un usuario por su ID (eliminación lógica)
 const deleteUserById = async (id) => {
     try {
-        return await userModel.findByIdAndUpdate(id, { active: false }, { new: true });
+        return await userModel.findOneAndUpdate({ _id: id, active: true }, { active: false }, { new: true });
     } catch (error) {
         throw new Error('Error disabling user: ' + error.message);
     }
 };
 
-// Obtener un usuario por correo electrónico
+// Activar un usuario por su ID
+const activateUserById = async (id) => {
+    try {
+        return await userModel.findOneAndUpdate({ _id: id, active: false }, { active: true }, { new: true });
+    } catch (error) {
+        throw new Error('Error activating user: ' + error.message);
+    }
+};
+
+// Obtener un usuario por correo electrónico (solo si está activo)
 const getUserByEmail = async (email) => {
     try {
-        return await userModel.findOne({ email });
+        return await userModel.findOne({ email, active: true });
     } catch (error) {
         throw new Error('Error retrieving user by email: ' + error.message);
     }
@@ -68,8 +77,9 @@ module.exports = {
     createUser,
     getAllUsers,
     getAllActiveUsers,
-    getUserById,
+    getActiveUserById,
     updateUserById,
     deleteUserById,
+    activateUserById,
     getUserByEmail
 };

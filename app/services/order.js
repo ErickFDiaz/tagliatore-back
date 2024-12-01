@@ -46,6 +46,15 @@ const updateOrderById = async (id, updateData) => {
     }
 };
 
+// Actualizar el estado de una orden por su ID
+const updateOrderStatusById = async (id, status) => {
+    try {
+        return await orderModel.findByIdAndUpdate(id, { status }, { new: true });
+    } catch (error) {
+        throw new Error('Error updating order status: ' + error.message);
+    }
+};
+
 // Eliminar una orden por su ID (eliminación lógica)
 const deleteOrderById = async (id) => {
     try {
@@ -61,5 +70,6 @@ module.exports = {
     getAllActiveOrders,
     getOrderById,
     updateOrderById,
+    updateOrderStatusById,
     deleteOrderById
 };

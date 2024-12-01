@@ -1,13 +1,14 @@
-const userService = require('../services/users');
+// category_controller.js
+const categoryService = require('../services/category');
 const responseHandler = require('../helpers/handleResponse');
 
 /**
- * Get all users
+ * Get all categories
  */
 const getItems = async (req, res) => {
     try {
-        const users = await userService.getAllUsers();
-        const response = responseHandler.success('Users retrieved successfully', users);
+        const categories = await categoryService.getAllCategories();
+        const response = responseHandler.success('Categories retrieved successfully', categories);
         responseHandler.send(res, response);
     } catch (e) {
         const response = responseHandler.internalServerError(e.message);
@@ -16,12 +17,12 @@ const getItems = async (req, res) => {
 };
 
 /**
- * Get all active users
+ * Get all active categories
  */
 const getActiveItems = async (req, res) => {
     try {
-        const users = await userService.getAllActiveUsers();
-        const response = responseHandler.success('Active users retrieved successfully', users);
+        const categories = await categoryService.getAllActiveCategories();
+        const response = responseHandler.success('Active categories retrieved successfully', categories);
         responseHandler.send(res, response);
     } catch (e) {
         const response = responseHandler.internalServerError(e.message);
@@ -30,17 +31,17 @@ const getActiveItems = async (req, res) => {
 };
 
 /**
- * Get a single active user by ID
+ * Get a single active category by ID
  */
 const getItem = async (req, res) => {
     try {
         const { id } = req.params;
-        const user = await userService.getActiveUserById(id);
-        if (!user) {
-            const response = responseHandler.notFoundError('User not found or inactive');
+        const category = await categoryService.getCategoryById(id);
+        if (!category) {
+            const response = responseHandler.notFoundError('Category not found or inactive');
             return responseHandler.send(res, response);
         }
-        const response = responseHandler.success('User retrieved successfully', user);
+        const response = responseHandler.success('Category retrieved successfully', category);
         responseHandler.send(res, response);
     } catch (e) {
         const response = responseHandler.internalServerError(e.message);
@@ -49,13 +50,13 @@ const getItem = async (req, res) => {
 };
 
 /**
- * Create a new user
+ * Create a new category
  */
 const createItem = async (req, res) => {
     try {
-        const { dni, email, password, role, name, address, phone } = req.body;
-        const newUser = await userService.createUser({ dni, email, password, role, name, address, phone });
-        const response = responseHandler.success('User created successfully', newUser);
+        const { name, active } = req.body;
+        const newCategory = await categoryService.createCategory({ name, active });
+        const response = responseHandler.success('Category created successfully', newCategory);
         responseHandler.send(res, response);
     } catch (e) {
         const response = responseHandler.internalServerError(e.message);
@@ -64,18 +65,18 @@ const createItem = async (req, res) => {
 };
 
 /**
- * Update a user by ID
+ * Update a category by ID
  */
 const updateItem = async (req, res) => {
     try {
         const { id } = req.params;
         const updateData = req.body;
-        const updatedUser = await userService.updateUserById(id, updateData);
-        if (!updatedUser) {
-            const response = responseHandler.notFoundError('User not found or inactive');
+        const updatedCategory = await categoryService.updateCategoryById(id, updateData);
+        if (!updatedCategory) {
+            const response = responseHandler.notFoundError('Category not found or inactive');
             return responseHandler.send(res, response);
         }
-        const response = responseHandler.success('User updated successfully', updatedUser);
+        const response = responseHandler.success('Category updated successfully', updatedCategory);
         responseHandler.send(res, response);
     } catch (e) {
         const response = responseHandler.internalServerError(e.message);
@@ -84,17 +85,17 @@ const updateItem = async (req, res) => {
 };
 
 /**
- * Delete a user by ID
+ * Delete a category by ID (logical deletion)
  */
 const deleteItem = async (req, res) => {
     try {
         const { id } = req.params;
-        const deletedUser = await userService.deleteUserById(id);
-        if (!deletedUser) {
-            const response = responseHandler.notFoundError('User not found or already inactive');
+        const deletedCategory = await categoryService.deleteCategoryById(id);
+        if (!deletedCategory) {
+            const response = responseHandler.notFoundError('Category not found or already inactive');
             return responseHandler.send(res, response);
         }
-        const response = responseHandler.success('User deleted successfully', deletedUser);
+        const response = responseHandler.success('Category deleted successfully', deletedCategory);
         responseHandler.send(res, response);
     } catch (e) {
         const response = responseHandler.internalServerError(e.message);
@@ -103,17 +104,17 @@ const deleteItem = async (req, res) => {
 };
 
 /**
- * Activate a user by ID
+ * Activate a category by ID
  */
 const activateItem = async (req, res) => {
     try {
         const { id } = req.params;
-        const activatedUser = await userService.activateUserById(id);
-        if (!activatedUser) {
-            const response = responseHandler.notFoundError('User not found or already active');
+        const activatedCategory = await categoryService.activateCategoryById(id);
+        if (!activatedCategory) {
+            const response = responseHandler.notFoundError('Category not found or already active');
             return responseHandler.send(res, response);
         }
-        const response = responseHandler.success('User activated successfully', activatedUser);
+        const response = responseHandler.success('Category activated successfully', activatedCategory);
         responseHandler.send(res, response);
     } catch (e) {
         const response = responseHandler.internalServerError(e.message);
@@ -122,11 +123,11 @@ const activateItem = async (req, res) => {
 };
 
 module.exports = {
-    getItem,
     getItems,
     getActiveItems,
+    getItem,
     createItem,
     updateItem,
     deleteItem,
-    activateItem,
+    activateItem
 };

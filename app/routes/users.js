@@ -3,7 +3,7 @@ const router = express.Router()
 // const checkOrigin = require('../middleware/origin')
 // const checkAuth = require('../middleware/auth')
 const checkRoleAuth = require('../middleware/roleAuth')
-const { getItems, getItem, deleteItem, updateItem } = require('../controllers/users')
+const { getItems, getActiveItems, getItem, deleteItem, updateItem, createItem, activateItem } = require('../controllers/users');
 //const { validateCreateUser } = require('../validators/users')
 
 // //TODO: Turbo 🐱‍🏍  cache!
@@ -14,16 +14,27 @@ const { getItems, getItem, deleteItem, updateItem } = require('../controllers/us
 //     getItems
 // )
 
-router.get('/', checkRoleAuth(['admin']), getItems)
+// Obtener todos los usuarios
+router.get('/', checkRoleAuth(['admin']), getItems);
 
-router.get('/:id', checkRoleAuth(['admin']), getItem)
+// Obtener todos los usuarios activos
+router.get('/active', checkRoleAuth(['admin']), getActiveItems);
 
-//TODO: Donde recibimos data
-// router.post('/', checkOrigin, validateCreateUser, createItem)
+// Obtener un usuario activo por su ID
+router.get('/:id', checkRoleAuth(['admin']), getItem);
 
-router.patch('/:id', checkRoleAuth(['admin']), updateItem)
+// Crear un nuevo usuario
+// router.post('/', checkOrigin, validateCreateUser, createItem);
+router.post('/', checkRoleAuth(['admin']), createItem);
 
-router.delete('/:id', checkRoleAuth(['admin']), deleteItem)
+// Actualizar un usuario por su ID
+router.patch('/:id', checkRoleAuth(['admin']), updateItem);
+
+// Eliminar (desactivar) un usuario por su ID
+router.delete('/:id', checkRoleAuth(['admin']), deleteItem);
+
+// Activar un usuario por su ID
+router.patch('/:id/activate', checkRoleAuth(['admin']), activateItem);
 
 
 module.exports = router

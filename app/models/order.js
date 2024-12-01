@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const OrderDetailSchema = new mongoose.Schema({
-    dish_id: {
+    dish: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'dishes',
         required: true,
@@ -14,16 +14,16 @@ const OrderDetailSchema = new mongoose.Schema({
 });
 
 const OrderSchema = new mongoose.Schema({
-    table_id: {
+    table: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'tables',
         required: true,
     },
-    client_id: {
+    client: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'clients',
     },
-    waiter_id: {
+    waiter: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'waiters',
     },

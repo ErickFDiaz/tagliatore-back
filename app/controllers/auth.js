@@ -3,16 +3,16 @@ const { tokenSign } = require('../helpers/generateToken');
 const userService = require('../services/users');
 const responseHandler = require('../helpers/handleResponse');
 
-// TODO: Login!
+// Login Controller
 const loginCtrl = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // Usar el servicio para obtener el usuario por email
+        // Usar el servicio para obtener el usuario activo por email
         const user = await userService.getUserByEmail(email);
 
         if (!user) {
-            const response = responseHandler.notFoundError('User not found');
+            const response = responseHandler.notFoundError('User not found or inactive');
             return responseHandler.send(res, response);
         }
 
@@ -39,19 +39,22 @@ const loginCtrl = async (req, res) => {
     }
 };
 
-// TODO: Register user!
+// Register User Controller
 const registerCtrl = async (req, res) => {
     try {
-        const { email, password, name } = req.body;
+        const { dni, email, password, name, address, phone } = req.body;
 
         // Encripta la contraseña
         const passwordHash = await encrypt(password);
 
-        // Crea el usuario en la base de datos
+        // Crea el usuario en la base de datos sin especificar el rol (se utilizará el valor por defecto del modelo)
         const registerUser = await userService.createUser({
+            dni,
             email,
             name,
-            password: passwordHash
+            password: passwordHash,
+            address,
+            phone
         });
 
         const response = responseHandler.success('User registered successfully', registerUser);

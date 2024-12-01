@@ -1,6 +1,6 @@
-const dishModel = require('../models/dishes');
+const dishModel = require('../models/dish');
 
-// Crear un nuevo platillo
+// Crear un nuevo plato
 const createDish = async (dishData) => {
     try {
         const newDish = new dishModel(dishData);
@@ -10,48 +10,56 @@ const createDish = async (dishData) => {
     }
 };
 
-// Obtener todos los platillos
+// Obtener todos los platos
 const getAllDishes = async () => {
     try {
-        return await dishModel.find({});
+        return await dishModel.find({}).populate('category', 'name').lean();
     } catch (error) {
         throw new Error('Error retrieving dishes: ' + error.message);
     }
 };
 
-// Obtener todos los platillos activos
 const getAllActiveDishes = async () => {
     try {
-        return await dishModel.find({ active: true });
+        return await dishModel.find({ active: true }).populate('category', 'name').lean();
     } catch (error) {
-        throw new Error('Error retrieving active dishes: ' + error.message);
+        throw new Error('Error retrieving dishes: ' + error.message);
     }
 };
 
-// Obtener un platillo por su ID
+// Obtener un plato activo por su ID
 const getDishById = async (id) => {
     try {
-        return await dishModel.findById(id);
+        return await dishModel.findOne({ _id: id, active: true }).populate('category', 'name').lean();
     } catch (error) {
-        throw new Error('Error retrieving dish by ID: ' + error.message);
+        throw new Error('Error retrieving active dish by ID: ' + error.message);
     }
 };
 
-// Actualizar un platillo por su ID
+// Actualizar un plato por su ID (Solo si está activo)
 const updateDishById = async (id, updateData) => {
     try {
-        return await dishModel.findByIdAndUpdate(id, updateData, { new: true });
+        return await dishModel.findOneAndUpdate({ _id: id, active: true }, updateData, { new: true });
     } catch (error) {
         throw new Error('Error updating dish: ' + error.message);
     }
 };
 
-// Eliminar un platillo por su ID (eliminación lógica)
+// Eliminar un plato por su ID (eliminación lógica)
 const deleteDishById = async (id) => {
     try {
-        return await dishModel.findByIdAndUpdate(id, { active: false }, { new: true });
+        return await dishModel.findOneAndUpdate({ _id: id, active: true }, { active: false }, { new: true });
     } catch (error) {
         throw new Error('Error disabling dish: ' + error.message);
+    }
+};
+
+// Activar un plato por su ID
+const activateDishById = async (id) => {
+    try {
+        return await dishModel.findOneAndUpdate({ _id: id, active: false }, { active: true }, { new: true });
+    } catch (error) {
+        throw new Error('Error enabling dish: ' + error.message);
     }
 };
 
@@ -61,5 +69,6 @@ module.exports = {
     getAllActiveDishes,
     getDishById,
     updateDishById,
-    deleteDishById
+    deleteDishById,
+    activateDishById
 };
