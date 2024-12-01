@@ -1,4 +1,4 @@
-const tableModel = require('../models/tables');
+const tableModel = require('../models/table');
 
 // Crear una nueva mesa
 const createTable = async (tableData) => {
@@ -31,7 +31,7 @@ const getAllActiveTables = async () => {
 // Obtener una mesa por su ID
 const getTableById = async (id) => {
     try {
-        return await tableModel.findById(id);
+        return await tableModel.findOne({ _id: id, active: true });
     } catch (error) {
         throw new Error('Error retrieving table by ID: ' + error.message);
     }
@@ -40,7 +40,7 @@ const getTableById = async (id) => {
 // Actualizar una mesa por su ID
 const updateTableById = async (id, updateData) => {
     try {
-        return await tableModel.findByIdAndUpdate(id, updateData, { new: true });
+        return await tableModel.findOneAndUpdate({ _id: id, active: true }, updateData, { new: true });
     } catch (error) {
         throw new Error('Error updating table: ' + error.message);
     }
@@ -49,9 +49,17 @@ const updateTableById = async (id, updateData) => {
 // Eliminar una mesa por su ID (eliminación lógica)
 const deleteTableById = async (id) => {
     try {
-        return await tableModel.findByIdAndUpdate(id, { active: false }, { new: true });
+        return await tableModel.findOneAndUpdate({ _id: id, active: true }, { active: false }, { new: true });
     } catch (error) {
         throw new Error('Error disabling table: ' + error.message);
+    }
+};
+
+const activateTableById = async (id) => {
+    try {
+        return await tableModel.findOneAndUpdate({ _id: id, active: false }, { active: true }, { new: true });
+    } catch (error) {
+        throw new Error('Error activating table: ' + error.message);
     }
 };
 
@@ -61,5 +69,6 @@ module.exports = {
     getAllActiveTables,
     getTableById,
     updateTableById,
-    deleteTableById
+    deleteTableById,
+    activateTableById
 };

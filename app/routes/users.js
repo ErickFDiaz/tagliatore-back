@@ -28,7 +28,7 @@ router.get('/:id', checkRoleAuth(['admin']), getItem);
 router.post('/', checkRoleAuth(['admin']), createItem);
 
 // Actualizar un usuario por su ID
-router.patch('/:id', checkRoleAuth(['admin']), updateItem);
+router.put('/:id', checkRoleAuth(['admin']), updateItem);
 
 // Eliminar (desactivar) un usuario por su ID
 router.delete('/:id', checkRoleAuth(['admin']), deleteItem);

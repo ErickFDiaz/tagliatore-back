@@ -1,8 +1,15 @@
 const dishModel = require('../models/dish');
+const categoryModel = require('../models/category');
 
 // Crear un nuevo plato
 const createDish = async (dishData) => {
     try {
+        // Verificar que la categoría existe
+        const categoryExists = await categoryModel.findById(dishData.category);
+        if (!categoryExists) {
+            throw new Error('Invalid category: The provided category does not exist.');
+        }
+        // Si la categoría es válida, crea el nuevo plato
         const newDish = new dishModel(dishData);
         return await newDish.save();
     } catch (error) {
@@ -39,6 +46,12 @@ const getDishById = async (id) => {
 // Actualizar un plato por su ID (Solo si está activo)
 const updateDishById = async (id, updateData) => {
     try {
+        // Verificar que la categoría existe
+        const categoryExists = await categoryModel.findById(dishData.category);
+        if (!categoryExists) {
+            throw new Error('Invalid category: The provided category does not exist.');
+        }
+        // Si la categoría es válida, crea el nuevo plato
         return await dishModel.findOneAndUpdate({ _id: id, active: true }, updateData, { new: true });
     } catch (error) {
         throw new Error('Error updating dish: ' + error.message);
