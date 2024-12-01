@@ -1,0 +1,1363 @@
+{
+	"info": {
+		"_postman_id": "752f7a6e-7a92-4bb5-97b0-89a245eafb72",
+		"name": "DEV - BACK - Tagliatore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18674004"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Registrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dni\": \"76316023\",\r\n    \"email\": \"efdiaz.dev@gmail.com\",\r\n    \"password\": \"secret123\",\r\n    \"name\": \"Erick\",\r\n    \"address\": \"Lima\",\r\n    \"phone\": \"977872232\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/auth/register",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"efdiaz.dev@gmail.com\",\r\n    \"password\": \"secret123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/auth/login",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Listar Todo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Pastas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/category",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Activos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Pastas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/category/active",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"category",
+								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/category/674ba8ce3e5dac1436f295ef",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"category",
+								"674ba8ce3e5dac1436f295ef"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Pastas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/category",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Pastas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/category/674ba8ce3e5dac1436f295ef",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"category",
+								"674ba8ce3e5dac1436f295ef"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/category/674ba8ce3e5dac1436f295ef",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"category",
+								"674ba8ce3e5dac1436f295ef"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activar",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/category/674ba8ce3e5dac1436f295ef/activate",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"category",
+								"674ba8ce3e5dac1436f295ef",
+								"activate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Listar Activos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Pastas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/client/active",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"client",
+								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Pastas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/client",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/table/674bc52b0b161b37a64eb485",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"table",
+								"674bc52b0b161b37a64eb485"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dni\": \"70506056\",\r\n    \"name\":\"Fernando Ladera\",\r\n    \"address\":\"Calle mi equipo no hizo nada :v\",\r\n    \"email\":\"cliente@gmail.com\",\r\n    \"phone\":\"999888777\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/client",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Fernando Ladera\",\r\n    \"address\":\"Se programa para evitar actualizar el DNI\",\r\n    \"email\":\"cliente@gmail.com\",\r\n    \"phone\":\"999888777\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/client/674bcb6431092733baa752af",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"client",
+								"674bcb6431092733baa752af"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/client/674bcaf931092733baa752a4",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"client",
+								"674bcaf931092733baa752a4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activar",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/client/674bcaf931092733baa752a4/activate",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"client",
+								"674bcaf931092733baa752a4",
+								"activate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dish",
+			"item": [
+				{
+					"name": "Listar Activos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/dish/active",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"dish",
+								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Pastas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/dish",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"dish"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/dish/674bb5023aa704837fbb3ec6",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"dish",
+								"674bb5023aa704837fbb3ec6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\": \"674ba8ce3e5dac1436f295ef\", \r\n    \"name\": \"Tallarines a la bolongnesa\",\r\n    \"ingredients\": [\"Pasta\", \"Cream\", \"Cheese\", \"Garlic\"],\r\n    \"price\": 15.99,\r\n    \"image\": \"https://example.com/images/pasta-alfredo.jpg\",\r\n    \"active\": true\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/dish",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"dish"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\": \"674ba8ce3e5dac1436f295ef\", \r\n    \"name\": \"Lasaña\",\r\n    \"ingredients\": [\"Pasta\", \"Cream\", \"Cheese\", \"Garlic\"],\r\n    \"price\": 19.99,\r\n    \"image\": \"https://example.com/images/pasta-alfredo.jpg\",\r\n    \"active\": true\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/dish/674bb5023aa704837fbb3ec6",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"dish",
+								"674bb5023aa704837fbb3ec6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/dish/674bb5023aa704837fbb3ec6",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"dish",
+								"674bb5023aa704837fbb3ec6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activar",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/dish/674bb5023aa704837fbb3ec6/activate",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"dish",
+								"674bb5023aa704837fbb3ec6",
+								"activate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Listar Activos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/order/active",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"order",
+								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Pastas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/order",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/order/674be52fffe961ea380883ca",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"order",
+								"674be52fffe961ea380883ca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"table\": \"674bc6a99ca96f79695c342b\",        // ObjectId de la mesa\r\n    \"client\": \"674bcaf931092733baa752a4\",       // ObjectId del cliente\r\n    \"waiter\": \"674bcf1d8df8daa7dbbb48e9\",       // ObjectId del camarero\r\n    \"orderDetails\": [\r\n        {\r\n            \"dish\": \"674bb53053cb51c03ce4801f\", // ObjectId del plato\r\n            \"quantity\": 2                      // Cantidad del plato\r\n        },\r\n        {\r\n            \"dish\": \"674be13fbcf65836d8125454\",\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/order",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"table\": \"674bc6a99ca96f79695c342b\",        // ObjectId de la mesa\r\n    \"client\": \"674bcaf931092733baa752a4\",       // ObjectId del cliente\r\n    \"waiter\": \"674bcf1d8df8daa7dbbb48e9\",       // ObjectId del camarero\r\n    \"orderDetails\": [\r\n        {\r\n            \"dish\": \"674bb53053cb51c03ce4801f\", // ObjectId del plato\r\n            \"quantity\": 2                      // Cantidad del plato\r\n        },\r\n        {\r\n            \"dish\": \"674be13fbcf65836d8125454\",\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"dish\": \"674be13fbcf65836d8125454\",\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/order/674be52fffe961ea380883ca",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"order",
+								"674be52fffe961ea380883ca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/order/674be52fffe961ea380883ca",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"order",
+								"674be52fffe961ea380883ca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activar",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/order/674be52fffe961ea380883ca/activate",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"order",
+								"674be52fffe961ea380883ca",
+								"activate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cambiar estado",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\":\"canceled\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/order/674be52fffe961ea380883ca/status",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"order",
+								"674be52fffe961ea380883ca",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Table",
+			"item": [
+				{
+					"name": "Listar Activos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Pastas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/table/active",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"table",
+								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Pastas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/table",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"table"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/table/674bc52b0b161b37a64eb485",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"table",
+								"674bc52b0b161b37a64eb485"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tableNumber\":2,\r\n    \"name\":\"Mesa 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/table",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"table"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tableNumber\":2,\r\n    \"name\":\"Mesa 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/table/674bc6ae9ca96f79695c342e",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"table",
+								"674bc6ae9ca96f79695c342e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/table/674bc6ae9ca96f79695c342e",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"table",
+								"674bc6ae9ca96f79695c342e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activar",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/table/674bc6ae9ca96f79695c342e/activate",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"table",
+								"674bc6ae9ca96f79695c342e",
+								"activate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Waiter",
+			"item": [
+				{
+					"name": "Listar Activos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Pastas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/waiter/active",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"waiter",
+								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Pastas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/waiter",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"waiter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/waiter/674bc52b0b161b37a64eb485",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"waiter",
+								"674bc52b0b161b37a64eb485"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dni\": \"10203060\",\r\n    \"name\":\"Mozo 2\",\r\n    \"address\":\"Calle mi equipo no hizo nada :v\",\r\n    \"email\":\"mozo1@gmail.com\",\r\n    \"phone\":\"999888777\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/waiter",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"waiter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Mozo 2\",\r\n    \"address\": \"Calle Las perlas\",\r\n    \"email\": \"mozo1@gmail.com\",\r\n    \"phone\": \"999888777\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASEURL}}/waiter/674bd9698df8daa7dbbb48ef",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"waiter",
+								"674bd9698df8daa7dbbb48ef"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/waiter/674bd9698df8daa7dbbb48ef",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"waiter",
+								"674bd9698df8daa7dbbb48ef"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activar",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASEURL}}/waiter/674bd9698df8daa7dbbb48ef/activate",
+							"host": [
+								"{{BASEURL}}"
+							],
+							"path": [
+								"waiter",
+								"674bd9698df8daa7dbbb48ef",
+								"activate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
