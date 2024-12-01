@@ -22,10 +22,12 @@ const OrderSchema = new mongoose.Schema({
     client: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'clients',
+        required: true,
     },
     waiter: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'waiters',
+        required: true,
     },
     status: {
         type: String,

@@ -1,8 +1,9 @@
-const orderModel = require('../models/orders');
+const orderModel = require('../models/order');
 
 // Crear una nueva orden con sus detalles
 const createOrder = async (orderData) => {
     try {
+
         const newOrder = new orderModel(orderData);
         return await newOrder.save();
     } catch (error) {
@@ -13,7 +14,19 @@ const createOrder = async (orderData) => {
 // Obtener todas las órdenes
 const getAllOrders = async () => {
     try {
-        return await orderModel.find({});
+        return await orderModel.find({})
+            .populate('table', 'tableNumber name status')
+            .populate('client', 'name')
+            .populate('waiter', 'name')
+            .populate({
+                path: 'orderDetails.dish',
+                select: 'name price category',
+                populate: {
+                    path: 'category',
+                    select: 'name' // Poblar el nombre de la categoría
+                }
+            })
+            .lean();
     } catch (error) {
         throw new Error('Error retrieving orders: ' + error.message);
     }
@@ -22,7 +35,19 @@ const getAllOrders = async () => {
 // Obtener todas las órdenes activas
 const getAllActiveOrders = async () => {
     try {
-        return await orderModel.find({ active: true });
+        return await orderModel.find({ active: true })
+            .populate('table', 'tableNumber name status')
+            .populate('client', 'name')
+            .populate('waiter', 'name')
+            .populate({
+                path: 'orderDetails.dish',
+                select: 'name price category',
+                populate: {
+                    path: 'category',
+                    select: 'name' // Poblar el nombre de la categoría
+                }
+            })
+            .lean();
     } catch (error) {
         throw new Error('Error retrieving active orders: ' + error.message);
     }
@@ -31,7 +56,19 @@ const getAllActiveOrders = async () => {
 // Obtener una orden por su ID
 const getOrderById = async (id) => {
     try {
-        return await orderModel.findById(id).populate('orderDetails.dish_id');
+        return await orderModel.findById(id)
+            .populate('table', 'tableNumber name status')
+            .populate('client', 'name')
+            .populate('waiter', 'name')
+            .populate({
+                path: 'orderDetails.dish',
+                select: 'name price category',
+                populate: {
+                    path: 'category',
+                    select: 'name' // Poblar el nombre de la categoría
+                }
+            })
+            .lean();
     } catch (error) {
         throw new Error('Error retrieving order by ID: ' + error.message);
     }
@@ -64,6 +101,14 @@ const deleteOrderById = async (id) => {
     }
 };
 
+const activateOrderById = async (id) => {
+    try {
+        return await orderModel.findByIdAndUpdate(id, { active: true }, { new: true });
+    } catch (error) {
+        throw new Error('Error enabling order: ' + error.message);
+    }
+};
+
 module.exports = {
     createOrder,
     getAllOrders,
@@ -71,5 +116,6 @@ module.exports = {
     getOrderById,
     updateOrderById,
     updateOrderStatusById,
-    deleteOrderById
+    deleteOrderById,
+    activateOrderById
 };

@@ -1,4 +1,4 @@
-const waiterModel = require('../models/waiters');
+const waiterModel = require('../models/waiter');
 
 // Crear un nuevo mesero
 const createWaiter = async (waiterData) => {
