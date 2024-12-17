@@ -47,14 +47,16 @@ const getDishById = async (id) => {
 const updateDishById = async (id, updateData) => {
     try {
         // Verificar que la categoría existe
-        const categoryExists = await categoryModel.findById(dishData.category);
+        const categoryExists = await categoryModel.findById(updateData.category);
         if (!categoryExists) {
             throw new Error('Invalid category: The provided category does not exist.');
         }
         // Si la categoría es válida, crea el nuevo plato
         return await dishModel.findOneAndUpdate({ _id: id, active: true }, updateData, { new: true });
     } catch (error) {
+        console.log(error);
         throw new Error('Error updating dish: ' + error.message);
+        
     }
 };
 
