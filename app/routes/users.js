@@ -15,26 +15,26 @@ const { getItems, getActiveItems, getItem, deleteItem, updateItem, createItem, a
 // )
 
 // Obtener todos los usuarios
-router.get('/', checkRoleAuth(['admin']), getItems);
+router.get('/', checkRoleAuth(['user','admin']), getItems);
 
 // Obtener todos los usuarios activos
-router.get('/active', checkRoleAuth(['admin']), getActiveItems);
+router.get('/active', checkRoleAuth(['user','admin']), getActiveItems);
 
 // Obtener un usuario activo por su ID
-router.get('/:id', checkRoleAuth(['admin']), getItem);
+router.get('/:id', checkRoleAuth(['user','admin']), getItem);
 
 // Crear un nuevo usuario
 // router.post('/', checkOrigin, validateCreateUser, createItem);
-router.post('/', checkRoleAuth(['admin']), createItem);
+router.post('/', checkRoleAuth(['user','admin']), createItem);
 
 // Actualizar un usuario por su ID
-router.put('/:id', checkRoleAuth(['admin']), updateItem);
+router.put('/:id', checkRoleAuth(['user','admin']), updateItem);
 
 // Eliminar (desactivar) un usuario por su ID
-router.delete('/:id', checkRoleAuth(['admin']), deleteItem);
+router.delete('/:id', checkRoleAuth(['user','admin']), deleteItem);
 
 // Activar un usuario por su ID
-router.patch('/:id/activate', checkRoleAuth(['admin']), activateItem);
+router.patch('/:id/activate', checkRoleAuth(['user','admin']), activateItem);
 
 
 module.exports = router
